@@ -26,7 +26,9 @@ INSTALLED_APPS = [
     'apps.banner.apps.BannerConfig',
     'apps.slider.apps.SliderConfig',
     'apps.blog.apps.BlogConfig',
-    'apps.product.apps.ProductConfig'
+    'apps.product.apps.ProductConfig',
+    'apps.horizonta_lists.apps.HorizontaListsConfig',
+    'apps.ticket.apps.TicketConfig'
 ]
 
 MIDDLEWARE = [
