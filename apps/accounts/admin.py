@@ -4,7 +4,7 @@ from .models import User
 @admin.register(User)
 class CustomUserAdmin(admin.ModelAdmin):
     model = User
-    list_display = ('user_phone', 'name', 'family', 'is_admin')
+    list_display = ('get_user_img', 'user_phone', 'name', 'family', 'is_admin')
     search_fields = ('user_phone', 'name', 'family')
     readonly_fields = ('register_date',)
 

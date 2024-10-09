@@ -1,41 +1,39 @@
 {% extends 'Fast_Cart6/base.html' %}
 
 {% block content_base %}
- <!-- Home Section Start -->
-    <section class="home-section pt-2 ratio_50">
-        <div class="container-fluid-lg">
-            <div class="row g-4">
-                <div class="col-xl-9 col-lg-8 ratio_50_1">
-                    <div class="home-contain furniture-contain-2">
-                        <img src="/media/fastCart6/images/furniture/banner/1.jpg" class="bg-img blur-up lazyload" alt="">
-                        <div class="home-detail p-top-left mend-auto w-100">
-                            <div>
-                                <h6>فروش ویژه <span>30% تخفیف</span></h6>
-                                <h1 class="text-uppercase poster-1 text-content furniture-heading">خانه بمان ، راحت خرید کن<span class="daily">نیازمندی روزانه</span></h1>
-                                <button onclick="location.href = 'shop-left-sidebar.html';"
-                                    class="btn btn-furniture mt-xxl-4 mt-3 home-button mend-auto">خرید آنلاین <i
-                                        class="fa-solid fa-left-long ms-2 icon"></i></button>
+    <!-- Home Section Start -->
+    {% if data.banners %}
+        <section class="home-section pt-2 ratio_50">
+            <div class="container-fluid-lg">
+                <div class="row g-4">
+                    {% for banner in data.banners %}
+                        {% if banner.location == 'top_top' %}
+                            <div class="{% for size in banner.banner_size.all %} {{ size.size }} {% endfor %} ratio_50_1">
+                                <div class="home-contain furniture-contain-2"
+                                     style="height: 100%;background-image: url('/media/{{ banner.picture }}'); 
+                                             background-size: cover; background-position: center center; background-repeat: no-repeat; display: block;">
+                                    <img src="/media/{{ banner.picture }}" class="bg-img blur-up lazyload " style="height: 100%;" alt="{{ banner.picture_alt }}"
+                                         title="{{ banner.picture_title }}">
+                                    <div class="home-detail p-top-left mend-auto w-100">
+                                        <div>
+                                            <h6>{{ banner.badge1 }}<span>{{ banner.badge2 }}</span></h6>
+                                            <h3 class="text-uppercase poster-1 text-content furniture-heading">{{ banner.title }} <br><span
+                                                    class="daily">{{ banner.description }}</span></h3>
+                                            <a href="{{ banner.link }}">
+                                                <button class="btn btn-furniture mt-xxl-4 mt-3 home-button mend-auto">{{ banner.link_title }}
+                                                    <i class="fa-solid fa-left-long ms-2 icon"></i>
+                                                </button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-3 col-lg-4 d-lg-inline-block d-none">
-                    <div class="home-contain h-100 home-furniture">
-                        <img src="/media/fastCart6/images/furniture/banner/2.png" class="bg-img blur-up lazyload" alt="">
-                        <div class="home-detail p-top-left home-p-sm feature-detail mend-auto">
-                            <div>
-                                <h2 class="mt-0 theme-color text-kaushan fw-normal">فروش انحصاری</h2>
-                                <h3 class="furniture-content">مبلمان</h3>
-                                <a href="shop-left-sidebar.html"
-                                    class="shop-button btn btn-furniture mt-0 d-inline-block btn-md text-content">خرید آنلاین <i class="fa-solid fa-left-long ms-2"></i></a>
-                            </div>
-                        </div>
-                    </div>
+                        {% endif %}
+                    {% endfor %}
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    {% endif %}
     <!-- Home Section End -->
 
     <!-- Service Section Start -->
@@ -164,12 +162,12 @@
                                     <div class="product-image">
                                         <a href="product-left-thumbnail.html">
                                             <img src="/media/fastCart6/images/furniture/1.png"
-                                                class="img-fluid blur-up lazyload" alt="">
+                                                 class="img-fluid blur-up lazyload" alt="">
                                         </a>
                                         <ul class="product-option">
                                             <li data-bs-toggle="tooltip" data-bs-placement="top" title="نمایش">
                                                 <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                    data-bs-target="#view">
+                                                   data-bs-target="#view">
                                                     <i data-feather="eye"></i>
                                                 </a>
                                             </li>
@@ -203,13 +201,13 @@
                                             <div class="cart_qty qty-box-2">
                                                 <div class="input-group">
                                                     <button type="button" class="qty-left-minus" data-type="minus"
-                                                        data-field="">
+                                                            data-field="">
                                                         <i class="fa fa-minus" aria-hidden="true"></i>
                                                     </button>
                                                     <input class="form-control input-number qty-input" type="text"
-                                                        name="quantity" value="1">
+                                                           name="quantity" value="1">
                                                     <button type="button" class="qty-right-plus" data-type="plus"
-                                                        data-field="">
+                                                            data-field="">
                                                         <i class="fa fa-plus" aria-hidden="true"></i>
                                                     </button>
                                                 </div>
@@ -224,12 +222,12 @@
                                     <div class="product-image">
                                         <a href="product-left-thumbnail.html">
                                             <img src="/media/fastCart6/images/furniture/2.png"
-                                                class="img-fluid blur-up lazyload" alt="">
+                                                 class="img-fluid blur-up lazyload" alt="">
                                         </a>
                                         <ul class="product-option">
                                             <li data-bs-toggle="tooltip" data-bs-placement="top" title="نمایش">
                                                 <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                    data-bs-target="#view">
+                                                   data-bs-target="#view">
                                                     <i data-feather="eye"></i>
                                                 </a>
                                             </li>
@@ -262,13 +260,13 @@
                                             <div class="cart_qty qty-box-2">
                                                 <div class="input-group">
                                                     <button type="button" class="qty-left-minus" data-type="minus"
-                                                        data-field="">
+                                                            data-field="">
                                                         <i class="fa fa-minus" aria-hidden="true"></i>
                                                     </button>
                                                     <input class="form-control input-number qty-input" type="text"
-                                                        name="quantity" value="1">
+                                                           name="quantity" value="1">
                                                     <button type="button" class="qty-right-plus" data-type="plus"
-                                                        data-field="">
+                                                            data-field="">
                                                         <i class="fa fa-plus" aria-hidden="true"></i>
                                                     </button>
                                                 </div>
@@ -283,12 +281,12 @@
                                     <div class="product-image">
                                         <a href="product-left-thumbnail.html">
                                             <img src="/media/fastCart6/images/furniture/3.png"
-                                                class="img-fluid blur-up lazyload" alt="">
+                                                 class="img-fluid blur-up lazyload" alt="">
                                         </a>
                                         <ul class="product-option">
                                             <li data-bs-toggle="tooltip" data-bs-placement="top" title="نمایش">
                                                 <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                    data-bs-target="#view">
+                                                   data-bs-target="#view">
                                                     <i data-feather="eye"></i>
                                                 </a>
                                             </li>
@@ -321,13 +319,13 @@
                                             <div class="cart_qty qty-box-2">
                                                 <div class="input-group">
                                                     <button type="button" class="qty-left-minus" data-type="minus"
-                                                        data-field="">
+                                                            data-field="">
                                                         <i class="fa fa-minus" aria-hidden="true"></i>
                                                     </button>
                                                     <input class="form-control input-number qty-input" type="text"
-                                                        name="quantity" value="1">
+                                                           name="quantity" value="1">
                                                     <button type="button" class="qty-right-plus" data-type="plus"
-                                                        data-field="">
+                                                            data-field="">
                                                         <i class="fa fa-plus" aria-hidden="true"></i>
                                                     </button>
                                                 </div>
@@ -342,12 +340,12 @@
                                     <div class="product-image">
                                         <a href="product-left-thumbnail.html">
                                             <img src="/media/fastCart6/images/furniture/4.png"
-                                                class="img-fluid blur-up lazyload" alt="">
+                                                 class="img-fluid blur-up lazyload" alt="">
                                         </a>
                                         <ul class="product-option">
                                             <li data-bs-toggle="tooltip" data-bs-placement="top" title="نمایش">
                                                 <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                    data-bs-target="#view">
+                                                   data-bs-target="#view">
                                                     <i data-feather="eye"></i>
                                                 </a>
                                             </li>
@@ -380,13 +378,13 @@
                                             <div class="cart_qty qty-box-2">
                                                 <div class="input-group">
                                                     <button type="button" class="qty-left-minus" data-type="minus"
-                                                        data-field="">
+                                                            data-field="">
                                                         <i class="fa fa-minus" aria-hidden="true"></i>
                                                     </button>
                                                     <input class="form-control input-number qty-input" type="text"
-                                                        name="quantity" value="1">
+                                                           name="quantity" value="1">
                                                     <button type="button" class="qty-right-plus" data-type="plus"
-                                                        data-field="">
+                                                            data-field="">
                                                         <i class="fa fa-plus" aria-hidden="true"></i>
                                                     </button>
                                                 </div>
@@ -401,12 +399,12 @@
                                     <div class="product-image">
                                         <a href="product-left-thumbnail.html">
                                             <img src="/media/fastCart6/images/furniture/5.png"
-                                                class="img-fluid blur-up lazyload" alt="">
+                                                 class="img-fluid blur-up lazyload" alt="">
                                         </a>
                                         <ul class="product-option">
                                             <li data-bs-toggle="tooltip" data-bs-placement="top" title="نمایش">
                                                 <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                    data-bs-target="#view">
+                                                   data-bs-target="#view">
                                                     <i data-feather="eye"></i>
                                                 </a>
                                             </li>
@@ -439,13 +437,13 @@
                                             <div class="cart_qty qty-box-2">
                                                 <div class="input-group">
                                                     <button type="button" class="qty-left-minus" data-type="minus"
-                                                        data-field="">
+                                                            data-field="">
                                                         <i class="fa fa-minus" aria-hidden="true"></i>
                                                     </button>
                                                     <input class="form-control input-number qty-input" type="text"
-                                                        name="quantity" value="1">
+                                                           name="quantity" value="1">
                                                     <button type="button" class="qty-right-plus" data-type="plus"
-                                                        data-field="">
+                                                            data-field="">
                                                         <i class="fa fa-plus" aria-hidden="true"></i>
                                                     </button>
                                                 </div>
@@ -460,12 +458,12 @@
                                     <div class="product-image">
                                         <a href="product-left-thumbnail.html">
                                             <img src="/media/fastCart6/images/furniture/6.png"
-                                                class="img-fluid blur-up lazyload" alt="">
+                                                 class="img-fluid blur-up lazyload" alt="">
                                         </a>
                                         <ul class="product-option">
                                             <li data-bs-toggle="tooltip" data-bs-placement="top" title="نمایش">
                                                 <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                    data-bs-target="#view">
+                                                   data-bs-target="#view">
                                                     <i data-feather="eye"></i>
                                                 </a>
                                             </li>
@@ -498,13 +496,13 @@
                                             <div class="cart_qty qty-box-2">
                                                 <div class="input-group">
                                                     <button type="button" class="qty-left-minus" data-type="minus"
-                                                        data-field="">
+                                                            data-field="">
                                                         <i class="fa fa-minus" aria-hidden="true"></i>
                                                     </button>
                                                     <input class="form-control input-number qty-input" type="text"
-                                                        name="quantity" value="1">
+                                                           name="quantity" value="1">
                                                     <button type="button" class="qty-right-plus" data-type="plus"
-                                                        data-field="">
+                                                            data-field="">
                                                         <i class="fa fa-plus" aria-hidden="true"></i>
                                                     </button>
                                                 </div>
@@ -519,12 +517,12 @@
                                     <div class="product-image">
                                         <a href="product-left-thumbnail.html">
                                             <img src="/media/fastCart6/images/furniture/7.png"
-                                                class="img-fluid blur-up lazyload" alt="">
+                                                 class="img-fluid blur-up lazyload" alt="">
                                         </a>
                                         <ul class="product-option">
                                             <li data-bs-toggle="tooltip" data-bs-placement="top" title="نمایش">
                                                 <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                    data-bs-target="#view">
+                                                   data-bs-target="#view">
                                                     <i data-feather="eye"></i>
                                                 </a>
                                             </li>
@@ -557,13 +555,13 @@
                                             <div class="cart_qty qty-box-2">
                                                 <div class="input-group">
                                                     <button type="button" class="qty-left-minus" data-type="minus"
-                                                        data-field="">
+                                                            data-field="">
                                                         <i class="fa fa-minus" aria-hidden="true"></i>
                                                     </button>
                                                     <input class="form-control input-number qty-input" type="text"
-                                                        name="quantity" value="1">
+                                                           name="quantity" value="1">
                                                     <button type="button" class="qty-right-plus" data-type="plus"
-                                                        data-field="">
+                                                            data-field="">
                                                         <i class="fa fa-plus" aria-hidden="true"></i>
                                                     </button>
                                                 </div>
@@ -579,12 +577,12 @@
                                     <div class="product-image">
                                         <a href="product-left-thumbnail.html">
                                             <img src="/media/fastCart6/images/furniture/8.png"
-                                                class="img-fluid blur-up lazyload" alt="">
+                                                 class="img-fluid blur-up lazyload" alt="">
                                         </a>
                                         <ul class="product-option">
                                             <li data-bs-toggle="tooltip" data-bs-placement="top" title="نمایش">
                                                 <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                    data-bs-target="#view">
+                                                   data-bs-target="#view">
                                                     <i data-feather="eye"></i>
                                                 </a>
                                             </li>
@@ -617,13 +615,13 @@
                                             <div class="cart_qty qty-box-2">
                                                 <div class="input-group">
                                                     <button type="button" class="qty-left-minus" data-type="minus"
-                                                        data-field="">
+                                                            data-field="">
                                                         <i class="fa fa-minus" aria-hidden="true"></i>
                                                     </button>
                                                     <input class="form-control input-number qty-input" type="text"
-                                                        name="quantity" value="1">
+                                                           name="quantity" value="1">
                                                     <button type="button" class="qty-right-plus" data-type="plus"
-                                                        data-field="">
+                                                            data-field="">
                                                         <i class="fa fa-plus" aria-hidden="true"></i>
                                                     </button>
                                                 </div>
@@ -638,12 +636,12 @@
                                     <div class="product-image">
                                         <a href="product-left-thumbnail.html">
                                             <img src="/media/fastCart6/images/furniture/9.png"
-                                                class="img-fluid blur-up lazyload" alt="">
+                                                 class="img-fluid blur-up lazyload" alt="">
                                         </a>
                                         <ul class="product-option">
                                             <li data-bs-toggle="tooltip" data-bs-placement="top" title="نمایش">
                                                 <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                    data-bs-target="#view">
+                                                   data-bs-target="#view">
                                                     <i data-feather="eye"></i>
                                                 </a>
                                             </li>
@@ -676,13 +674,13 @@
                                             <div class="cart_qty qty-box-2">
                                                 <div class="input-group">
                                                     <button type="button" class="qty-left-minus" data-type="minus"
-                                                        data-field="">
+                                                            data-field="">
                                                         <i class="fa fa-minus" aria-hidden="true"></i>
                                                     </button>
                                                     <input class="form-control input-number qty-input" type="text"
-                                                        name="quantity" value="1">
+                                                           name="quantity" value="1">
                                                     <button type="button" class="qty-right-plus" data-type="plus"
-                                                        data-field="">
+                                                            data-field="">
                                                         <i class="fa fa-plus" aria-hidden="true"></i>
                                                     </button>
                                                 </div>
@@ -698,12 +696,12 @@
                                     <div class="product-image">
                                         <a href="product-left-thumbnail.html">
                                             <img src="/media/fastCart6/images/furniture/10.png"
-                                                class="img-fluid blur-up lazyload" alt="">
+                                                 class="img-fluid blur-up lazyload" alt="">
                                         </a>
                                         <ul class="product-option">
                                             <li data-bs-toggle="tooltip" data-bs-placement="top" title="نمایش">
                                                 <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                    data-bs-target="#view">
+                                                   data-bs-target="#view">
                                                     <i data-feather="eye"></i>
                                                 </a>
                                             </li>
@@ -736,13 +734,13 @@
                                             <div class="cart_qty qty-box-2">
                                                 <div class="input-group">
                                                     <button type="button" class="qty-left-minus" data-type="minus"
-                                                        data-field="">
+                                                            data-field="">
                                                         <i class="fa fa-minus" aria-hidden="true"></i>
                                                     </button>
                                                     <input class="form-control input-number qty-input" type="text"
-                                                        name="quantity" value="1">
+                                                           name="quantity" value="1">
                                                     <button type="button" class="qty-right-plus" data-type="plus"
-                                                        data-field="">
+                                                            data-field="">
                                                         <i class="fa fa-plus" aria-hidden="true"></i>
                                                     </button>
                                                 </div>
@@ -769,7 +767,7 @@
                             <a href="shop-left-sidebar.html" class="category-box category-dark">
                                 <div>
                                     <img src="/media/fastCart6/images/furniture/icon/decorations.svg" class="blur-up lazyload"
-                                        alt="">
+                                         alt="">
                                     <h5>دکوراسیون</h5>
                                 </div>
                             </a>
@@ -779,8 +777,8 @@
                             <a href="shop-left-sidebar.html" class="category-box category-dark">
                                 <div>
                                     <img src="/media/fastCart6/images/furniture/icon/pillows.svg" class="blur-up lazyload"
-                                        alt="">
-                                        <h5>ملحفه</h5>
+                                         alt="">
+                                    <h5>ملحفه</h5>
                                 </div>
                             </a>
                         </div>
@@ -789,7 +787,7 @@
                             <a href="shop-left-sidebar.html" class="category-box category-dark">
                                 <div>
                                     <img src="/media/fastCart6/images/furniture/icon/cushions.svg" class="blur-up lazyload"
-                                        alt="">
+                                         alt="">
                                     <h5>کوسن ها</h5>
                                 </div>
                             </a>
@@ -799,8 +797,8 @@
                             <a href="shop-left-sidebar.html" class="category-box category-dark">
                                 <div>
                                     <img src="/media/fastCart6/images/furniture/icon/blankets.svg" class="blur-up lazyload"
-                                        alt="">
-                                        <h5>پتو</h5>
+                                         alt="">
+                                    <h5>پتو</h5>
                                 </div>
                             </a>
                         </div>
@@ -818,7 +816,7 @@
                             <a href="shop-left-sidebar.html" class="category-box category-dark">
                                 <div>
                                     <img src="/media/fastCart6/images/furniture/icon/sleepware.svg" class="blur-up lazyload"
-                                        alt="">
+                                         alt="">
                                     <h5>لباس خواب</h5>
                                 </div>
                             </a>
@@ -828,7 +826,7 @@
                             <a href="shop-left-sidebar.html" class="category-box category-dark">
                                 <div>
                                     <img src="/media/fastCart6/images/furniture/icon/bakeware.svg" class="blur-up lazyload"
-                                        alt="">
+                                         alt="">
                                     <h5>ظروف آشپزی و نان</h5>
                                 </div>
                             </a>
@@ -840,13 +838,13 @@
                             <div class="col-md-6">
                                 <div class="banner-contain hover-effect">
                                     <img src="/media/fastCart6/images/furniture/banner/4.jpg" class="bg-img blur-up lazyload"
-                                        alt="">
+                                         alt="">
                                     <div class="banner-details p-center-left p-4">
                                         <div>
                                             <h3 class="text-kaushan text-yellow">50% تخفیف</h3>
                                             <h4 class="theme-color mb-2 fw-normal"><span class="theme-color fw-bold">فصل تازه</span> در راه است</h4>
                                             <button onclick="location.href = 'shop-left-sidebar.html';"
-                                                class="btn btn-furniture btn-sm mend-auto">خرید آنلاین <i
+                                                    class="btn btn-furniture btn-sm mend-auto">خرید آنلاین <i
                                                     class="fa-solid fa-arrow-left icon"></i></button>
                                         </div>
                                     </div>
@@ -855,14 +853,14 @@
                             <div class="col-md-6">
                                 <div class="banner-contain hover-effect">
                                     <img src="/media/fastCart6/images/furniture/banner/5.jpg" class="bg-img blur-up lazyload"
-                                        alt="">
+                                         alt="">
                                     <div class="banner-details p-center-left p-4">
                                         <div>
                                             <h3 class="text-kaushan text-yellow">50% تخفیف</h3>
                                             <h4 class="theme-color mb-2 fw-normal"><span
                                                     class="theme-color fw-bold">تعویض</span> لوازم خانه</h4>
                                             <button onclick="location.href = 'shop-left-sidebar.html';"
-                                                class="btn btn-furniture btn-sm mend-auto">خرید آنلاین <i
+                                                    class="btn btn-furniture btn-sm mend-auto">خرید آنلاین <i
                                                     class="fa-solid fa-arrow-left icon"></i></button>
                                         </div>
                                     </div>
@@ -887,7 +885,7 @@
                                 <div class="product-image">
                                     <a href="product-left-thumbnail.html">
                                         <img src="/media/fastCart6/images/furniture/13.png" class="img-fluid blur-up lazyload"
-                                            alt="">
+                                             alt="">
                                     </a>
                                     <ul class="product-option">
                                         <li data-bs-toggle="tooltip" data-bs-placement="top" title="نمایش">
@@ -924,13 +922,13 @@
                                         <div class="cart_qty qty-box-2">
                                             <div class="input-group">
                                                 <button type="button" class="qty-left-minus" data-type="minus"
-                                                    data-field="">
+                                                        data-field="">
                                                     <i class="fa fa-minus" aria-hidden="true"></i>
                                                 </button>
                                                 <input class="form-control input-number qty-input" type="text"
-                                                    name="quantity" value="1">
+                                                       name="quantity" value="1">
                                                 <button type="button" class="qty-right-plus" data-type="plus"
-                                                    data-field="">
+                                                        data-field="">
                                                     <i class="fa fa-plus" aria-hidden="true"></i>
                                                 </button>
                                             </div>
@@ -945,7 +943,7 @@
                                 <div class="product-image">
                                     <a href="product-left-thumbnail.html">
                                         <img src="/media/fastCart6/images/furniture/8.png" class="img-fluid blur-up lazyload"
-                                            alt="">
+                                             alt="">
                                     </a>
                                     <ul class="product-option">
                                         <li data-bs-toggle="tooltip" data-bs-placement="top" title="نمایش">
@@ -982,13 +980,13 @@
                                         <div class="cart_qty qty-box-2">
                                             <div class="input-group">
                                                 <button type="button" class="qty-left-minus" data-type="minus"
-                                                    data-field="">
+                                                        data-field="">
                                                     <i class="fa fa-minus" aria-hidden="true"></i>
                                                 </button>
                                                 <input class="form-control input-number qty-input" type="text"
-                                                    name="quantity" value="1">
+                                                       name="quantity" value="1">
                                                 <button type="button" class="qty-right-plus" data-type="plus"
-                                                    data-field="">
+                                                        data-field="">
                                                     <i class="fa fa-plus" aria-hidden="true"></i>
                                                 </button>
                                             </div>
@@ -1003,7 +1001,7 @@
                                 <div class="product-image">
                                     <a href="product-left-thumbnail.html">
                                         <img src="/media/fastCart6/images/furniture/10.png" class="img-fluid blur-up lazyload"
-                                            alt="">
+                                             alt="">
                                     </a>
                                     <ul class="product-option">
                                         <li data-bs-toggle="tooltip" data-bs-placement="top" title="نمایش">
@@ -1040,13 +1038,13 @@
                                         <div class="cart_qty qty-box-2">
                                             <div class="input-group">
                                                 <button type="button" class="qty-left-minus" data-type="minus"
-                                                    data-field="">
+                                                        data-field="">
                                                     <i class="fa fa-minus" aria-hidden="true"></i>
                                                 </button>
                                                 <input class="form-control input-number qty-input" type="text"
-                                                    name="quantity" value="1">
+                                                       name="quantity" value="1">
                                                 <button type="button" class="qty-right-plus" data-type="plus"
-                                                    data-field="">
+                                                        data-field="">
                                                     <i class="fa fa-plus" aria-hidden="true"></i>
                                                 </button>
                                             </div>
@@ -1061,7 +1059,7 @@
                                 <div class="product-image">
                                     <a href="product-left-thumbnail.html">
                                         <img src="/media/fastCart6/images/furniture/6.png" class="img-fluid blur-up lazyload"
-                                            alt="">
+                                             alt="">
                                     </a>
                                     <ul class="product-option">
                                         <li data-bs-toggle="tooltip" data-bs-placement="top" title="نمایش">
@@ -1098,13 +1096,13 @@
                                         <div class="cart_qty qty-box-2">
                                             <div class="input-group">
                                                 <button type="button" class="qty-left-minus" data-type="minus"
-                                                    data-field="">
+                                                        data-field="">
                                                     <i class="fa fa-minus" aria-hidden="true"></i>
                                                 </button>
                                                 <input class="form-control input-number qty-input" type="text"
-                                                    name="quantity" value="1">
+                                                       name="quantity" value="1">
                                                 <button type="button" class="qty-right-plus" data-type="plus"
-                                                    data-field="">
+                                                        data-field="">
                                                     <i class="fa fa-plus" aria-hidden="true"></i>
                                                 </button>
                                             </div>
@@ -1119,7 +1117,7 @@
                                 <div class="product-image">
                                     <a href="product-left-thumbnail.html">
                                         <img src="/media/fastCart6/images/furniture/4.png" class="img-fluid blur-up lazyload"
-                                            alt="">
+                                             alt="">
                                     </a>
                                     <ul class="product-option">
                                         <li data-bs-toggle="tooltip" data-bs-placement="top" title="نمایش">
@@ -1156,13 +1154,13 @@
                                         <div class="cart_qty qty-box-2">
                                             <div class="input-group">
                                                 <button type="button" class="qty-left-minus" data-type="minus"
-                                                    data-field="">
+                                                        data-field="">
                                                     <i class="fa fa-minus" aria-hidden="true"></i>
                                                 </button>
                                                 <input class="form-control input-number qty-input" type="text"
-                                                    name="quantity" value="1">
+                                                       name="quantity" value="1">
                                                 <button type="button" class="qty-right-plus" data-type="plus"
-                                                    data-field="">
+                                                        data-field="">
                                                     <i class="fa fa-plus" aria-hidden="true"></i>
                                                 </button>
                                             </div>
@@ -1182,7 +1180,7 @@
                                 <li>
                                     <div class="category-list">
                                         <img src="/media/fastCart6/images/furniture/icon/decorations.svg"
-                                            class="blur-up lazyload" alt="">
+                                             class="blur-up lazyload" alt="">
                                         <h5>
                                             <a href="shop-left-sidebar.html">دکوراسیون</a>
                                         </h5>
@@ -1191,7 +1189,7 @@
                                 <li>
                                     <div class="category-list">
                                         <img src="/media/fastCart6/images/furniture/icon/pillows.svg" class="blur-up lazyload"
-                                            alt="">
+                                             alt="">
                                         <h5>
                                             <a href="shop-left-sidebar.html">ملحفه</a>
                                         </h5>
@@ -1200,7 +1198,7 @@
                                 <li>
                                     <div class="category-list">
                                         <img src="/media/fastCart6/images/furniture/icon/cushions.svg" class="blur-up lazyload"
-                                            alt="">
+                                             alt="">
                                         <h5>
                                             <a href="shop-left-sidebar.html">کوسن ها</a>
                                         </h5>
@@ -1209,7 +1207,7 @@
                                 <li>
                                     <div class="category-list">
                                         <img src="/media/fastCart6/images/furniture/icon/blankets.svg" class="blur-up lazyload"
-                                            alt="">
+                                             alt="">
                                         <h5>
                                             <a href="shop-left-sidebar.html">پتو</a>
                                         </h5>
@@ -1218,7 +1216,7 @@
                                 <li>
                                     <div class="category-list">
                                         <img src="/media/fastCart6/images/furniture/icon/gift.svg" class="blur-up lazyload"
-                                            alt="">
+                                             alt="">
                                         <h5>
                                             <a href="shop-left-sidebar.html">بسته بندی های هدیه</a>
                                         </h5>
@@ -1227,7 +1225,7 @@
                                 <li>
                                     <div class="category-list">
                                         <img src="/media/fastCart6/images/furniture/icon/sleepware.svg"
-                                            class="blur-up lazyload" alt="">
+                                             class="blur-up lazyload" alt="">
                                         <h5>
                                             <a href="shop-left-sidebar.html">لباس خواب</a>
                                         </h5>
@@ -1236,7 +1234,7 @@
                                 <li>
                                     <div class="category-list">
                                         <img src="/media/fastCart6/images/furniture/icon/bakeware.svg" class="blur-up lazyload"
-                                            alt="">
+                                             alt="">
                                         <h5>
                                             <a href="shop-left-sidebar.html">ظروف آشپزی و نان</a>
                                         </h5>
@@ -1245,7 +1243,7 @@
                                 <li>
                                     <div class="category-list">
                                         <img src="/media/fastCart6/images/furniture/icon/room-fragrance.svg"
-                                            class="blur-up lazyload" alt="">
+                                             class="blur-up lazyload" alt="">
                                         <h5>
                                             <a href="shop-left-sidebar.html">عطر اتاق</a>
                                         </h5>
@@ -1254,7 +1252,7 @@
                                 <li>
                                     <div class="category-list">
                                         <img src="/media/fastCart6/images/furniture/icon/tableware.svg"
-                                            class="blur-up lazyload" alt="">
+                                             class="blur-up lazyload" alt="">
                                         <h5>
                                             <a href="shop-left-sidebar.html">ظروف سرو و سفره</a>
                                         </h5>
@@ -1263,7 +1261,7 @@
                                 <li>
                                     <div class="category-list">
                                         <img src="/media/fastCart6/images/furniture/icon/shower.svg" class="blur-up lazyload"
-                                            alt="">
+                                             alt="">
                                         <h5>
                                             <a href="shop-left-sidebar.html">حمام و دوش</a>
                                         </h5>
@@ -1275,14 +1273,14 @@
                         <div class="ratio_156 section-t-space">
                             <div class="home-contain hover-effect">
                                 <img src="/media/fastCart6/images/furniture/banner/3.jpg" class="bg-img blur-up lazyload"
-                                    alt="">
+                                     alt="">
                                 <div class="home-detail p-top-left home-p-medium">
                                     <div>
                                         <h4 class="text-yellow home-banner text-kaushan">محصول جدید</h4>
                                         <h3 class="text-uppercase theme-color fw-bold mb-1">میز تحریر</h3>
                                         <p class="text-content mb-3">پرفروش ترین هفته! پیشنهاد انحصاری</p>
                                         <button onclick="location.href = 'shop-left-sidebar.html';"
-                                            class="btn btn-furniture btn-md mend-auto">خرید آنلاین <i
+                                                class="btn btn-furniture btn-md mend-auto">خرید آنلاین <i
                                                 class="fa-solid fa-arrow-left icon"></i></button>
                                     </div>
                                 </div>
@@ -1298,7 +1296,7 @@
                                         <div class="offer-product">
                                             <a href="product-left-thumbnail.html" class="offer-image">
                                                 <img src="/media/fastCart6/images/furniture/2.png" class="blur-up lazyload"
-                                                    alt="">
+                                                     alt="">
                                             </a>
 
                                             <div class="offer-detail">
@@ -1317,7 +1315,7 @@
                                         <div class="offer-product">
                                             <a href="product-left-thumbnail.html" class="offer-image">
                                                 <img src="/media/fastCart6/images/furniture/3.png" class="blur-up lazyload"
-                                                    alt="">
+                                                     alt="">
                                             </a>
 
                                             <div class="offer-detail">
@@ -1336,7 +1334,7 @@
                                         <div class="offer-product">
                                             <a href="product-left-thumbnail.html" class="offer-image">
                                                 <img src="/media/fastCart6/images/furniture/5.png" class="blur-up lazyload"
-                                                    alt="">
+                                                     alt="">
                                             </a>
 
                                             <div class="offer-detail">
@@ -1370,15 +1368,17 @@
                         <img src="/media/fastCart6/images/furniture/banner/6.jpg" class="bg-img" alt="">
                         <img src="/media/fastCart6/images/furniture/banner/1-1.png" class="flower-pot img-fluid" alt="">
                         <div
-                            class="banner-detail p-center-left position-relative d-block py-0 banner-furniture mend-auto">
+                                class="banner-detail p-center-left position-relative d-block py-0 banner-furniture mend-auto">
                             <div class="row">
                                 <div class="col-xl-6 offset-xxl-2 offset-xl-1 col-md-8 col-sm-9">
-                                    <h4 class="text-uppercase text-yellow text-kaushan furniture-title">بهترین تخفیف را دریافت کنید<img src="/media/fastCart6/images/furniture/arrow.svg" alt=""></h4>
+                                    <h4 class="text-uppercase text-yellow text-kaushan furniture-title">بهترین تخفیف را دریافت کنید<img
+                                            src="/media/fastCart6/images/furniture/arrow.svg" alt=""></h4>
                                     <h2 class="mt-sm-3 mt-1 mb-2 text-content">طراحی داخلی <span
                                             class="theme-color fw-bold">فارس کد</span></h2>
                                     <p class="text-content">طراحی داخلی منزل خود را به ما بسپارید تا با کمترین هزینه زیباترین دیزاین را به شما تحویل دهیم.</p>
                                     <button class="btn theme-bg-color mt-sm-4 mt-2 btn-md text-white fw-bold"
-                                        onclick="location.href = '#';">سفارش طراحی</button>
+                                            onclick="location.href = '#';">سفارش طراحی
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -1725,7 +1725,7 @@
                                     <h5>20 دلار تخفیف برای اولین سفارش شما</h5>
                                     <div class="input-box">
                                         <input type="email" class="form-control" id="exampleFormControlInput1"
-                                             placeholder="ایمیل خود را وارد کنید">
+                                               placeholder="ایمیل خود را وارد کنید">
                                         <i class="fa-solid fa-envelope arrow"></i>
                                         <button class="sub-btn  btn-animation">
                                             <span class="d-sm-block d-none">عضویت</span>

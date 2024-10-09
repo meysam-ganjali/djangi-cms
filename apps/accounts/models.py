@@ -7,10 +7,10 @@ from django.utils.html import mark_safe
 
 
 class CustomerUserManager(BaseUserManager):
-    def create_user(self, user_phone, password, name='', family='', image=None,active_code=None):
+    def create_user(self, user_phone, password, name='', family='', image=None, active_code=None):
         if not user_phone:
             raise ValueError('شماره موبایل را وارد نکرده اید')
-        user = self.model(user_phone=user_phone, name=name, family=family, image=image,active_code=active_code)
+        user = self.model(user_phone=user_phone, name=name, family=family, image=image, active_code=active_code)
         if len(password) < 6:
             raise ValueError('طول کلمه عبور باید بیشتر از 6 باشد')
         user.set_password(password)
@@ -34,7 +34,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     family = models.CharField(max_length=50, verbose_name='نام خانوادگی', null=True, blank=True)
     register_date = jmodels.jDateField(default=jdatetime.date.today(), verbose_name='تاریخ ثبت نام')
     is_active = models.BooleanField(default=False, verbose_name='کاربر فعال باشد یا نه؟')
-    is_admin = models.BooleanField(default=False,verbose_name='کاربر مدیر باشد یا نه؟')
+    is_admin = models.BooleanField(default=False, verbose_name='کاربر مدیر باشد یا نه؟')
 
     USERNAME_FIELD = 'user_phone'
     REQUIRED_FIELDS = ['name', 'family']
@@ -48,8 +48,10 @@ class User(AbstractBaseUser, PermissionsMixin):
         return f'{self.name} {self.family}'
 
     def get_user_img(self):
-        return mark_safe(
-            '<img src="/media/%s" width="50" height="50" style="border-radius:5px;" />' % self.image)
+       if self.image:
+           return mark_safe('<img src="/media/%s" width="50" height="50" style="border-radius:5px;" />' % self.image)
+       return mark_safe(
+            '<img src="/media/no-image.png" width="50" height="50" style="border-radius:5px;" />')
 
     get_user_img.short_description = ''
     get_user_img.allow_tags = True
