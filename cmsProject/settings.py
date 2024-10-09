@@ -30,7 +30,7 @@ INSTALLED_APPS = [
     'apps.horizonta_lists.apps.HorizontaListsConfig',
     'apps.ticket.apps.TicketConfig'
 ]
-
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -133,5 +133,5 @@ MEDIA_ROOT = path.join(BASE_DIR, 'media/')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.User'
-
+LOGOUT_REDIRECT_URL = '/'
 

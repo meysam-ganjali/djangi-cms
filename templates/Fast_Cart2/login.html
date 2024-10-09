@@ -1,10 +1,10 @@
 {% extends 'Fast_Cart2/base.html' %}
 {% block Title %}
-	ورود به حساب کاربری
+    ورود به حساب کاربری
 {% endblock %}
 
 {% block content_base %}
-	<section class="breadcrumb-section pt-0">
+    <section class="breadcrumb-section pt-0">
         <div class="container-fluid-lg">
             <div class="row">
                 <div class="col-12">
@@ -13,7 +13,7 @@
                         <nav>
                             <ol class="breadcrumb mb-0">
                                 <li class="breadcrumb-item">
-                                    <a href="index.html">
+                                    <a href="{% url 'home:index' %}">
                                         <i class="fa-solid fa-house"></i>
                                     </a>
                                 </li>
@@ -37,22 +37,22 @@
                 <div class="col-xxl-4 col-xl-5 col-lg-6 col-sm-8 mx-auto">
                     <div class="log-in-box">
                         <div class="log-in-title">
-                            <h3>به فست کارت خوش آمدید</h3>
                             <h4>ورود به حساب کاربری</h4>
                         </div>
 
                         <div class="input-box">
-                            <form class="row g-4">
+                            <form method="post" action="{% url 'accounts:login' %}" class="row g-4">
+                                {% csrf_token %}
                                 <div class="col-12">
                                     <div class="form-floating theme-form-floating log-in-form">
-                                        <input type="email" class="form-control" id="email" placeholder="آدرس ایمیل خود را وارد کنید">
-                                        <label for="email">آدرس ایمیل</label>
+                                        {{ login_form.phone }}
+                                        <label for="id_phone">شماره تلفن همراه</label>
                                     </div>
                                 </div>
 
                                 <div class="col-12">
                                     <div class="form-floating theme-form-floating log-in-form">
-                                        <input type="password" class="form-control" id="password" placeholder="رمز عبور خود را وارد کنید">
+                                        {{ login_form.password }}
                                         <label for="password">رمز عبور</label>
                                     </div>
                                 </div>
@@ -60,7 +60,7 @@
                                 <div class="col-12">
                                     <div class="forgot-box">
                                         <div class="form-check ps-0 m-0 remember-box">
-                                            <input class="checkbox_animated check-box" type="checkbox" id="flexCheckDefault">
+                                            <input class="checkbox_animated check-box" type="checkbox" name="remember" id="flexCheckDefault">
                                             <label class="form-check-label" for="flexCheckDefault">من را به خاطر
                                                 بسپار</label>
                                         </div>
@@ -90,4 +90,25 @@
             </div>
         </div>
     </section>
+{% endblock %}
+{% block CustomScript %}
+    {% if messages %}
+        <script>
+            {% for message in messages %}
+                iziToast.error({
+                    title: 'خطا',
+                    message: '{{ message }}',
+                    position: 'topRight',
+                    rtl: true,
+                    backgroundColor: 'rgb(255,51,51)',
+                    messageColor: '#efefef',
+                    titleColor: '#fff',
+                    iconColor:  '#fff',
+                    balloon: true,
+                });
+            {% endfor %}
+
+        </script>
+    {% endif %}
+
 {% endblock %}

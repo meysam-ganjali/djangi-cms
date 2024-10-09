@@ -7,10 +7,10 @@ from django.utils.html import mark_safe
 
 
 class CustomerUserManager(BaseUserManager):
-    def create_user(self, user_phone, password, name='', family='', image=None):
+    def create_user(self, user_phone, password, name='', family='', image=None,active_code=None):
         if not user_phone:
             raise ValueError('شماره موبایل را وارد نکرده اید')
-        user = self.model(user_phone=user_phone, name=name, family=family, image=image)
+        user = self.model(user_phone=user_phone, name=name, family=family, image=image,active_code=active_code)
         if len(password) < 6:
             raise ValueError('طول کلمه عبور باید بیشتر از 6 باشد')
         user.set_password(password)
@@ -30,6 +30,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     user_phone = models.CharField(max_length=15, unique=True, verbose_name='شماره موبایل')
     image = models.ImageField(upload_to='users/avatar/', null=True, blank=True)
     name = models.CharField(max_length=1000, verbose_name='نام')
+    active_code = models.CharField(max_length=10, verbose_name='کد فعالسازی', null=True, blank=True)
     family = models.CharField(max_length=50, verbose_name='نام خانوادگی', null=True, blank=True)
     register_date = jmodels.jDateField(default=jdatetime.date.today(), verbose_name='تاریخ ثبت نام')
     is_active = models.BooleanField(default=False, verbose_name='کاربر فعال باشد یا نه؟')

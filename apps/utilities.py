@@ -6,3 +6,6 @@ def generate_code(number: int):
     from random import randint
     number = int(number)
     return str(randint(10 ** (number - 1), 10 ** (number)))
+
+def send_sms():
+    pass
